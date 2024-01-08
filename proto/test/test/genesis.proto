@@ -1,0 +1,12 @@
+syntax = "proto3";
+package test.test;
+
+import "gogoproto/gogo.proto";
+import "test/test/params.proto";
+
+option go_package = "test/x/test/types";
+
+// GenesisState defines the test module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}
