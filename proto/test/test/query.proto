@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package test.test;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "test/test/params.proto";
+import "test/test/listof.proto";
+
+option go_package = "test/x/test/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/test/test/params";
+  
+  }
+  
+  // Queries a list of Listof items.
+  rpc Listof    (QueryGetListofRequest) returns (QueryGetListofResponse) {
+    option (google.api.http).get = "/test/test/listof/{id}";
+  
+  }
+  rpc ListofAll (QueryAllListofRequest) returns (QueryAllListofResponse) {
+    option (google.api.http).get = "/test/test/listof";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetListofRequest {
+  uint64 id = 1;
+}
+
+message QueryGetListofResponse {
+  Listof Listof = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllListofRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllListofResponse {
+  repeated Listof                                 Listof     = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

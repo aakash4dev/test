@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package test.test;
+
+import "test/test/listof.proto";
+
+option go_package = "test/x/test/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc CreateListof (MsgCreateListof) returns (MsgCreateListofResponse);
+  rpc UpdateListof (MsgUpdateListof) returns (MsgUpdateListofResponse);
+  rpc DeleteListof (MsgDeleteListof) returns (MsgDeleteListofResponse);
+}
+message MsgCreateListof {
+  string creator   = 1;
+  string something = 2;
+}
+
+message MsgCreateListofResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateListof {
+  string creator   = 1;
+  uint64 id        = 2;
+  string something = 3;
+}
+
+message MsgUpdateListofResponse {}
+
+message MsgDeleteListof {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteListofResponse {}
+
