@@ -19,3 +19,6 @@ faucet:
 validators:
 - name: alice
   bonded: 100000000stake
+build:
+    ldflags:
+      - "-X main.Version=v0.0.1"
